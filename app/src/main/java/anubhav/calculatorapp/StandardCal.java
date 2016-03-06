@@ -9,7 +9,8 @@ import android.widget.EditText;
 public class StandardCal extends AppCompatActivity {
 
     EditText e1,e2;
-    int count=0;
+    private int count=0;
+    private String operation="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +87,7 @@ public class StandardCal extends AppCompatActivity {
                 e1.setText("");
                 e2.setText("");
                 count=0;
+                operation="";
                 break;
 
             case R.id.backSpace:
@@ -100,36 +102,76 @@ public class StandardCal extends AppCompatActivity {
                 break;
 
             case R.id.plus:
-
+                operationClicked("+");
                 break;
 
             case R.id.minus:
-
+                operationClicked("-");
                 break;
 
             case R.id.divide:
-
+                operationClicked("/");
                 break;
 
             case R.id.multiply:
-
+                operationClicked("x");
                 break;
 
             case R.id.sqrt:
-
+                if(e2.length()!=0)
+                {
+                    e2.setText("√("+e2.getText()+")");
+                }
                 break;
 
             case R.id.square:
-
+                if(e2.length()!=0)
+                {
+                    e1.setText(e1.getText()+operation+e2.getText().toString());
+                    e2.setText("");
+                    operation="sqr";
+                }
                 break;
 
             case R.id.posneg:
-
+                if(e2.length()!=0)
+                {
+                    e1.setText(e1.getText()+operation+e2.getText().toString());
+                    e2.setText("");
+                    operation="+";
+                }
                 break;
 
             case R.id.equal:
 
                 break;
+        }
+    }
+
+    private void operationClicked(String op)
+    {
+        if(e2.length()!=0)
+        {
+            if(op.length()!=0)
+            {
+                operation=op;
+                e1.setText(e1.getText() + e2.getText().toString()+op);
+                e2.setText("");
+            }
+            else
+            {
+                e1.setText(e2.getText().toString()+op);
+                operation=op;
+            }
+        }
+        else
+        {
+            String text=e1.getText().toString();
+            if(text.length()>0)
+            {
+                String newText=text.substring(0,text.length()-1)+op;
+                e1.setText(newText);
+            }
         }
     }
 
