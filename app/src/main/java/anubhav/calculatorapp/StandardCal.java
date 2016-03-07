@@ -10,7 +10,7 @@ public class StandardCal extends AppCompatActivity {
 
     EditText e1,e2;
     private int count=0;
-    private String operation="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +75,7 @@ public class StandardCal extends AppCompatActivity {
                 break;
 
             case R.id.dot:
-                if(count==0)
+                if(count==0 && e2.length()!=0)
                 {
                     e2.setText(e2.getText()+".");
                     count++;
@@ -87,7 +87,6 @@ public class StandardCal extends AppCompatActivity {
                 e1.setText("");
                 e2.setText("");
                 count=0;
-                operation="";
                 break;
 
             case R.id.backSpace:
@@ -120,25 +119,21 @@ public class StandardCal extends AppCompatActivity {
             case R.id.sqrt:
                 if(e2.length()!=0)
                 {
-                    e2.setText("√("+e2.getText()+")");
+                    e2.setText("√"+e2.getText());
                 }
                 break;
 
             case R.id.square:
                 if(e2.length()!=0)
                 {
-                    e1.setText(e1.getText()+operation+e2.getText().toString());
-                    e2.setText("");
-                    operation="sqr";
+                    e2.setText("sqr"+e2.getText());
                 }
                 break;
 
             case R.id.posneg:
                 if(e2.length()!=0)
                 {
-                    e1.setText(e1.getText()+operation+e2.getText().toString());
-                    e2.setText("");
-                    operation="+";
+                    e2.setText("√("+e2.getText()+")");
                 }
                 break;
 
@@ -152,17 +147,8 @@ public class StandardCal extends AppCompatActivity {
     {
         if(e2.length()!=0)
         {
-            if(op.length()!=0)
-            {
-                operation=op;
-                e1.setText(e1.getText() + e2.getText().toString()+op);
-                e2.setText("");
-            }
-            else
-            {
-                e1.setText(e2.getText().toString()+op);
-                operation=op;
-            }
+            e1.setText(e1.getText() + e2.getText().toString()+op);
+            e2.setText("");
         }
         else
         {
