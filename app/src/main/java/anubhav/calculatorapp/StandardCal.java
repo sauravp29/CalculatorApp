@@ -133,7 +133,12 @@ public class StandardCal extends AppCompatActivity {
             case R.id.posneg:
                 if(e2.length()!=0)
                 {
-                    e2.setText("√("+e2.getText()+")");
+                    String s=e2.getText().toString();
+                    char arr[]=s.toCharArray();
+                    if(arr[0]=='-')
+                        e2.setText(s.substring(1,s.length()));
+                    else
+                        e2.setText("-"+s);
                 }
                 break;
 
