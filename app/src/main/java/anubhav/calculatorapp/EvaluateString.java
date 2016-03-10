@@ -3,10 +3,13 @@ package anubhav.calculatorapp;
 /**
  * Created by Anubhav on 09-03-2016.
  */
+import android.util.Log;
+import android.widget.Toast;
+
 import java.util.Stack;
 
 public class EvaluateString {
-    public Double evaluate(String expression) {
+    public static Double evaluate(String expression) {
         char[] tokens = expression.toCharArray();
 
         // Stack for numbers: 'values'
@@ -55,8 +58,6 @@ public class EvaluateString {
     // Returns true if 'op2' has higher or same precedence as 'op1',
     // otherwise returns false.
     public static boolean hasPrecedence(char op1, char op2) {
-        if (op2 == '(' || op2 == ')')
-            return false;
         if ((op1 == 'x' || op1 == '/') && (op2 == '+' || op2 == '-'))
             return false;
         else
@@ -68,8 +69,10 @@ public class EvaluateString {
     public static Double applyOp(char op, Double b, Double a) {
         switch (op) {
             case '+':
+                Log.i("value",(a+b)+"");
                 return a + b;
             case '-':
+                Log.i("value",(a-b)+"");
                 return a - b;
             case 'x':
                 return a * b;

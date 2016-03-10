@@ -163,6 +163,9 @@ public class StandardCal extends AppCompatActivity {
                 break;
 
             case R.id.equal:
+                text=e2.getText().toString();
+                expression+=text;
+                e1.setText("");
                 EvaluateString es=new EvaluateString();
                 double res=es.evaluate(expression);
                 e2.setText(res+"");
@@ -183,6 +186,7 @@ public class StandardCal extends AppCompatActivity {
             }
 
             e2.setText("");
+            count=0;
         }
         else
         {
