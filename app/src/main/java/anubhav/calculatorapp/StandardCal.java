@@ -5,11 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class StandardCal extends AppCompatActivity {
 
     EditText e1,e2;
     private int count=0;
+    private String expression="";
+    private int len=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,15 +90,26 @@ public class StandardCal extends AppCompatActivity {
                 e1.setText("");
                 e2.setText("");
                 count=0;
+                expression="";
                 break;
 
             case R.id.backSpace:
                 String text=e2.getText().toString();
                 if(text.endsWith("."))
+                {
                     count=0;
+                }
                 if(text.length()>0)
                 {
                     String newText=text.substring(0,text.length()-1);
+                    //if e2 edit text contains only sqr or root or - sign then clear the edit text e2
+                    if(!(newText.contains("0") || newText.contains("1") || newText.contains("2")|| newText.contains("3")
+                            || newText.contains("4")|| newText.contains("5")|| newText.contains("6")|| newText.contains("7")
+                            || newText.contains("8")|| newText.contains("9")))
+                    {
+                        newText="";
+                        expression=expression.substring(0,len);
+                    }
                     e2.setText(newText);
                 }
                 break;
@@ -119,14 +133,20 @@ public class StandardCal extends AppCompatActivity {
             case R.id.sqrt:
                 if(e2.length()!=0)
                 {
-                    e2.setText("√"+e2.getText());
+                    text=e2.getText().toString();
+                    len=expression.length();
+                    expression+=Math.sqrt(Double.parseDouble(text));
+                    e2.setText("√" + text);
                 }
                 break;
 
             case R.id.square:
                 if(e2.length()!=0)
                 {
-                    e2.setText("sqr"+e2.getText());
+                    text=e2.getText().toString();
+                    len=expression.length();
+                    expression+=Math.pow(Double.parseDouble(text), 2.0);
+                    e2.setText("sqr"+text);
                 }
                 break;
 
@@ -143,7 +163,9 @@ public class StandardCal extends AppCompatActivity {
                 break;
 
             case R.id.equal:
-
+                EvaluateString es=new EvaluateString();
+                double res=es.evaluate(expression);
+                e2.setText(res+"");
                 break;
         }
     }
@@ -152,7 +174,14 @@ public class StandardCal extends AppCompatActivity {
     {
         if(e2.length()!=0)
         {
-            e1.setText(e1.getText() + e2.getText().toString()+op);
+            String text=e2.getText().toString();
+            e1.setText(e1.getText() + text+op);
+
+            if(!(text.contains("sqr") || text.contains("√")))
+            {
+                expression+=text+op;
+            }
+
             e2.setText("");
         }
         else
