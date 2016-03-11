@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.fathzer.soft.javaluator.DoubleEvaluator;
+
 public class StandardCal extends AppCompatActivity {
 
     EditText e1,e2;
@@ -163,12 +165,14 @@ public class StandardCal extends AppCompatActivity {
                 break;
 
             case R.id.equal:
+                /*for more knowledge on DoubleEvaluator and its tutorial got to the below link
+                http://javaluator.sourceforge.net/en/home/*/
                 text=e2.getText().toString();
                 expression+=text;
                 e1.setText("");
-                EvaluateString es=new EvaluateString();
-                double res=es.evaluate(expression);
-                e2.setText(res+"");
+                DoubleEvaluator evaluator = new DoubleEvaluator();
+                Double result = evaluator.evaluate(expression);
+                e2.setText(result+"");
                 break;
         }
     }
