@@ -132,7 +132,7 @@ public class StandardCal extends AppCompatActivity {
                 break;
 
             case R.id.multiply:
-                operationClicked("x");
+                operationClicked("*");
                 break;
 
             case R.id.sqrt:
@@ -140,7 +140,6 @@ public class StandardCal extends AppCompatActivity {
                 {
                     text=e2.getText().toString();
                     len=expression.length();
-                    expression+="sqrt("+text+")";
                     e2.setText("sqrt(" + text + ")");
                 }
                 break;
@@ -150,7 +149,6 @@ public class StandardCal extends AppCompatActivity {
                 {
                     text=e2.getText().toString();
                     len=expression.length();
-                    expression+="("+text+")^2";
                     e2.setText("("+text+")^2");
                 }
                 break;
@@ -168,17 +166,14 @@ public class StandardCal extends AppCompatActivity {
                 break;
 
             case R.id.equal:
-                /*for more knowledge on DoubleEvaluator and its tutorial got to the below link
+                /*for more knowledge on DoubleEvaluator and its tutorial go to the below link
                 http://javaluator.sourceforge.net/en/home/*/
-                text=e2.getText().toString();
-                if(e2.length() != 0&& !(text.contains("sqrt")||text.contains("sqr")))
-                {
+                if(e2.length()!=0)
                     text=e2.getText().toString();
-                    expression+=text;
-                }
+                expression=e1.getText().toString()+text;
                 e1.setText("");
                 DoubleEvaluator evaluator = new DoubleEvaluator();
-               Log.i("hello",expression);
+                Log.i("hello",expression);
                 result=new ExtendedDoubleEvaluator().evaluate(expression);
                 e2.setText(result+"");
                 break;
@@ -191,12 +186,6 @@ public class StandardCal extends AppCompatActivity {
         {
             String text=e2.getText().toString();
             e1.setText(e1.getText() + text+op);
-
-            if(!(text.contains("sqr") || text.contains("√")))
-            {
-                expression+=text+op;
-            }
-
             e2.setText("");
             count=0;
         }
