@@ -151,7 +151,7 @@ public class StandardCal extends AppCompatActivity {
                     text=e2.getText().toString();
                     len=expression.length();
                     expression+="("+text+")^2";
-                    e2.setText("sqr("+text+")");
+                    e2.setText("("+text+")^2");
                 }
                 break;
 
