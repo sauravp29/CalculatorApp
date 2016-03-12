@@ -3,6 +3,7 @@ package anubhav.calculatorapp;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,6 +16,8 @@ public class StandardCal extends AppCompatActivity {
     private int count=0;
     private String expression="";
     private int len=0;
+    String text="";
+    Double result=0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +99,7 @@ public class StandardCal extends AppCompatActivity {
                 break;
 
             case R.id.backSpace:
-                String text=e2.getText().toString();
+                text=e2.getText().toString();
                 if(text.endsWith("."))
                 {
                     count=0;
@@ -137,8 +140,8 @@ public class StandardCal extends AppCompatActivity {
                 {
                     text=e2.getText().toString();
                     len=expression.length();
-                    expression+=Math.sqrt(Double.parseDouble(text));
-                    e2.setText("√" + text);
+                    expression+="sqrt("+text+")";
+                    e2.setText("sqrt(" + text + ")");
                 }
                 break;
 
@@ -147,8 +150,8 @@ public class StandardCal extends AppCompatActivity {
                 {
                     text=e2.getText().toString();
                     len=expression.length();
-                    expression+=Math.pow(Double.parseDouble(text), 2.0);
-                    e2.setText("sqr"+text);
+                    expression+="("+text+")^2";
+                    e2.setText("sqr("+text+")");
                 }
                 break;
 
@@ -168,10 +171,15 @@ public class StandardCal extends AppCompatActivity {
                 /*for more knowledge on DoubleEvaluator and its tutorial got to the below link
                 http://javaluator.sourceforge.net/en/home/*/
                 text=e2.getText().toString();
-                expression+=text;
+                if(e2.length() != 0&& !(text.contains("sqrt")||text.contains("sqr")))
+                {
+                    text=e2.getText().toString();
+                    expression+=text;
+                }
                 e1.setText("");
                 DoubleEvaluator evaluator = new DoubleEvaluator();
-                Double result = evaluator.evaluate(expression);
+               Log.i("hello",expression);
+                result=new ExtendedDoubleEvaluator().evaluate(expression);
                 e2.setText(result+"");
                 break;
         }
