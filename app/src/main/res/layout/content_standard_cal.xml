@@ -220,26 +220,24 @@
         android:onClick="onClick" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="="
         android:id="@+id/equal"
-        android:layout_below="@+id/posneg"
+        android:onClick="onClick"
+        android:layout_below="@+id/openBracket"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/dot"
-        android:layout_toStartOf="@+id/dot"
-        android:onClick="onClick" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/square"
         android:id="@+id/square"
-        android:layout_alignBottom="@+id/equal"
-        android:layout_toRightOf="@+id/num0"
-        android:layout_toEndOf="@+id/num0"
-        android:onClick="onClick" />
+        android:onClick="onClick"
+        android:layout_below="@+id/dot"
+        android:layout_toLeftOf="@+id/sqrt"
+        android:layout_toStartOf="@+id/sqrt" />
 
     <Button
         android:layout_width="wrap_content"
@@ -250,5 +248,35 @@
         android:layout_alignLeft="@+id/multiply"
         android:layout_alignStart="@+id/multiply"
         android:onClick="onClick" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/openBracket"
+        android:id="@+id/openBracket"
+        android:layout_below="@+id/posneg"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="onClick"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/closeBracket"
+        android:id="@+id/closeBracket"
+        android:layout_alignBottom="@+id/square"
+        android:layout_toRightOf="@+id/openBracket"
+        android:layout_toEndOf="@+id/openBracket"
+        android:onClick="onClick"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/history"
+        android:id="@+id/button3"
+        android:layout_below="@+id/equal"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="onClick"/>
 
 </RelativeLayout>
