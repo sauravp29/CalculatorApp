@@ -100,21 +100,53 @@ public class StandardCal extends AppCompatActivity {
 
             case R.id.backSpace:
                 text=e2.getText().toString();
-                if(text.endsWith("."))
-                {
-                    count=0;
-                }
                 if(text.length()>0)
                 {
+                    if(text.endsWith("."))
+                    {
+                        count=0;
+                    }
                     String newText=text.substring(0,text.length()-1);
-                    //if e2 edit text contains only sqr or root or - sign then clear the edit text e2
-                    if(!(newText.contains("0") || newText.contains("1") || newText.contains("2")|| newText.contains("3")
-                            || newText.contains("4")|| newText.contains("5")|| newText.contains("6")|| newText.contains("7")
-                            || newText.contains("8")|| newText.contains("9")))
+                    //to delete the data contained in the brackets at once
+                    if(text.endsWith(")"))
+                    {
+                        char []a=text.toCharArray();
+                        int pos=a.length-2;
+                        int counter=1;
+                        //to find the opening bracket position
+                        for(int i=a.length-2;i>=0;i--)
+                        {
+                            if(a[i]==')')
+                            {
+                                counter++;
+                            }
+                            else if(a[i]=='(')
+                            {
+                                counter--;
+                            }
+                            //if decimal is deleted b/w brackets then count should be zero
+                            else if(a[i]=='.')
+                            {
+                                count=0;
+                            }
+                            //if opening bracket pair for the last bracket is found
+                            if(counter==0)
+                            {
+                                pos=i;
+                                break;
+                            }
+                        }
+                        newText=text.substring(0,pos);
+                    }
+                    //if e2 edit text contains only - sign or sqrt at last then clear the edit text e2
+                    if(newText.equals("-")||newText.endsWith("sqrt"))
                     {
                         newText="";
-                        expression=expression.substring(0,len);
                     }
+                    //if pow sign is left at the last
+                    else if(newText.endsWith("^"))
+                        newText=newText.substring(0,newText.length()-1);
+
                     e2.setText(newText);
                 }
                 break;
@@ -173,7 +205,6 @@ public class StandardCal extends AppCompatActivity {
                 expression=e1.getText().toString()+text;
                 e1.setText("");
                 DoubleEvaluator evaluator = new DoubleEvaluator();
-                Log.i("hello",expression);
                 result=new ExtendedDoubleEvaluator().evaluate(expression);
                 e2.setText(result+"");
                 break;
