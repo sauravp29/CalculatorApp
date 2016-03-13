@@ -15,10 +15,9 @@ public class StandardCal extends AppCompatActivity {
     EditText e1,e2;
     private int count=0;
     private String expression="";
-    private int len=0;
     private String text="";
     private Double result=0.0;
-
+    DBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +27,7 @@ public class StandardCal extends AppCompatActivity {
 
         e1=(EditText)findViewById(R.id.editText1);
         e2=(EditText)findViewById(R.id.editText2);
+        dbHelper=new DBHelper(this);
     }
 
     public void onClick(View v)
@@ -163,7 +163,6 @@ public class StandardCal extends AppCompatActivity {
                 if(e2.length()!=0)
                 {
                     text=e2.getText().toString();
-                    len=expression.length();
                     e2.setText("sqrt(" + text + ")");
                 }
                 break;
@@ -172,7 +171,6 @@ public class StandardCal extends AppCompatActivity {
                 if(e2.length()!=0)
                 {
                     text=e2.getText().toString();
-                    len=expression.length();
                     e2.setText("("+text+")^2");
                 }
                 break;
@@ -203,7 +201,11 @@ public class StandardCal extends AppCompatActivity {
                 DoubleEvaluator evaluator = new DoubleEvaluator();
                 try
                 {
+                    //evaluate the expression
                     result=new ExtendedDoubleEvaluator().evaluate(expression);
+                    //insert expression and result in sqlite database if expression is valid and not 0.0
+                    if(!expression.equals("0.0"))
+                        dbHelper.insert("STANDARD",expression+" = "+result);
                     e2.setText(result+"");
                 }
                 catch (Exception e)
