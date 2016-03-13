@@ -204,6 +204,7 @@ public class StandardCal extends AppCompatActivity {
                 try
                 {
                     result=new ExtendedDoubleEvaluator().evaluate(expression);
+                    e2.setText(result+"");
                 }
                 catch (Exception e)
                 {
@@ -212,7 +213,6 @@ public class StandardCal extends AppCompatActivity {
                     expression="";
                     e.printStackTrace();
                 }
-                e2.setText(result+"");
                 break;
 
             case R.id.openBracket:
