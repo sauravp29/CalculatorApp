@@ -2,10 +2,13 @@ package anubhav.calculatorapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  * Created by Anubhav on 13-03-2016.
@@ -37,11 +40,38 @@ public class DBHelper extends SQLiteOpenHelper {
         db=getWritableDatabase();
         ContentValues contentValues=new ContentValues();
         contentValues.put(column1,calcName);
-        contentValues.put(column2,expression);
+        contentValues.put(column2, expression);
         db.insert(table_Name, null, contentValues);
-        Log.i(TAG,calcName+"-->"+expression);
+        db.close();
     }
 
+    public ArrayList<String> showHistory(String calcName)
+    {
+        db=getReadableDatabase();
+        Cursor cursor;
+        ArrayList<String> list=new ArrayList<String>();
+        String []selectionArgs={calcName};
+        //cursor=db.query(table_Name,columns,column1+" LIKE ?",selectionArgs,null,null,null);
+        cursor=db.rawQuery("select * from history where "+column1+"= ?",selectionArgs);
+        if(cursor.moveToFirst())
+        {
+            do
+            {
+                String expression=cursor.getString(1);
+                list.add(expression);
+            }while (cursor.moveToNext());
+        }
+        db.close();
+        return list;
+    }
+
+    public void deleteRecords(String calcName)
+    {
+        db=getWritableDatabase();
+        String value[]={calcName};
+        int i=db.delete(table_Name, column1+"=?", value);
+        db.close();
+    }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 

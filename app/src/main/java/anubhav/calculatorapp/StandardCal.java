@@ -1,5 +1,6 @@
 package anubhav.calculatorapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -226,7 +227,9 @@ public class StandardCal extends AppCompatActivity {
                 break;
 
             case R.id.history:
-
+                Intent i=new Intent(this,History.class);
+                i.putExtra("calcName","STANDARD");
+                startActivity(i);
                 break;
         }
     }

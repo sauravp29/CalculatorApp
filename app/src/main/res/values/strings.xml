@@ -59,4 +59,6 @@
         <item>Grams</item>
         <item>Milligrams</item>
     </string-array>
+    <string name="title_activity_history">History</string>
+    <string name="deleteHistory">Delete History</string>
 </resources>
