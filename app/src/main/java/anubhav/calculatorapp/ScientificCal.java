@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.fathzer.soft.javaluator.DoubleEvaluator;
@@ -17,6 +18,7 @@ public class ScientificCal extends AppCompatActivity {
     private String text="";
     private Double result=0.0;
     private DBHelper dbHelper;
+    private Button mode,toggle,square,xpowy,log,sin,cos,tan,sqrt,fact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +29,81 @@ public class ScientificCal extends AppCompatActivity {
 
         e1 = (EditText) findViewById(R.id.editText);
         e2 = (EditText) findViewById(R.id.editText2);
+        mode = (Button) findViewById(R.id.mode);
+        toggle = (Button) findViewById(R.id.toggle);
+        square = (Button) findViewById(R.id.square);
+        xpowy = (Button) findViewById(R.id.xpowy);
+        log = (Button) findViewById(R.id.log);
+        sin = (Button) findViewById(R.id.sin);
+        cos = (Button) findViewById(R.id.cos);
+        tan = (Button) findViewById(R.id.tan);
+        sqrt= (Button) findViewById(R.id.sqrt);
+        fact = (Button) findViewById(R.id.factorial);
+
         dbHelper=new DBHelper(this);
+
+        //tags to change the mode from degree to radian and vice versa
+        mode.setTag(1);
+        //tags to change the names of the buttons performing different operations
+        toggle.setTag(1);
     }
 
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         switch (v.getId()) {
+
+            case R.id.toggle:
+                int toggleMode=((int)toggle.getTag());
+                //change the button text if switch button is clicked
+                if(toggleMode==1)
+                {
+                    toggle.setTag(2);
+                    square.setText(R.string.cube);
+                    xpowy.setText(R.string.tenpow);
+                    log.setText(R.string.naturalLog);
+                    sin.setText(R.string.sininv);
+                    cos.setText(R.string.cosinv);
+                    tan.setText(R.string.taninv);
+                    sqrt.setText(R.string.cuberoot);
+                    fact.setText(R.string.Mod);
+                }
+                else if(toggleMode==2)
+                {
+                    toggle.setTag(3);
+                    square.setText(R.string.square);
+                    xpowy.setText(R.string.xpown);
+                    log.setText(R.string.log);
+                    sin.setText(R.string.hyperbolicSine);
+                    cos.setText(R.string.hyperbolicCosine);
+                    tan.setText(R.string.hyperbolicTan);
+                    sqrt.setText(R.string.inverse);
+                    fact.setText(R.string.factorial);
+                }
+                else
+                {
+                    toggle.setTag(1);
+                    sin.setText(R.string.sin);
+                    cos.setText(R.string.cos);
+                    tan.setText(R.string.tan);
+                    sqrt.setText(R.string.sqrt);
+                }
+                break;
+
+            case R.id.mode:
+                int angleMode=((int)mode.getTag());
+                //change the angle property for trignometric operations if mode button is clicked
+                if(angleMode==1)
+                {
+                    mode.setTag(2);
+                    mode.setText(R.string.mode2);
+                }
+                else
+                {
+                    mode.setTag(1);
+                    mode.setText(R.string.mode1);
+                }
+                break;
+            
             case R.id.num0:
                 e2.setText(e2.getText() + "0");
                 break;

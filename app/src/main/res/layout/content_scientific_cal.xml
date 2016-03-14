@@ -70,7 +70,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="sin"
+        android:text="@string/sin"
         android:id="@+id/sin"
         android:layout_below="@+id/square"
         android:layout_alignParentLeft="true"
@@ -81,7 +81,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="cos"
+        android:text="@string/cos"
         android:id="@+id/cos"
         android:layout_alignBottom="@+id/sin"
         android:layout_alignLeft="@+id/xpowy"
@@ -92,7 +92,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="tan"
+        android:text="@string/tan"
         android:id="@+id/tan"
         android:layout_alignBottom="@+id/cos"
         android:layout_toRightOf="@+id/cos"
@@ -100,12 +100,11 @@
         android:onClick="onClick"
         android:textAllCaps="false"/>
 
-    <ToggleButton
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/inv"
-        android:textOn="switch"
-        android:textOff="switch"
+        android:id="@+id/toggle"
+        android:text="@string/toggle"
         android:layout_below="@+id/sin"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -117,11 +116,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="x!"
+        android:text="@string/factorial"
         android:id="@+id/factorial"
-        android:layout_alignBottom="@+id/inv"
-        android:layout_toRightOf="@+id/inv"
-        android:layout_toEndOf="@+id/inv"
+        android:layout_alignBottom="@+id/toggle"
+        android:layout_toRightOf="@+id/toggle"
+        android:layout_toEndOf="@+id/toggle"
         android:onClick="onClick"
         android:textAllCaps="false"/>
 
@@ -133,7 +132,8 @@
         android:layout_toRightOf="@+id/factorial"
         android:layout_toEndOf="@+id/factorial"
         android:text="@string/sqrt"
-        android:onClick="onClick" />
+        android:onClick="onClick"
+        android:textAllCaps="false"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -171,7 +171,7 @@
         android:layout_height="wrap_content"
         android:text="7"
         android:id="@+id/num7"
-        android:layout_below="@+id/inv"
+        android:layout_below="@+id/toggle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:onClick="onClick"/>
