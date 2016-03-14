@@ -61,4 +61,6 @@
     </string-array>
     <string name="title_activity_history">History</string>
     <string name="deleteHistory">Delete History</string>
+    <string name="mode1">Degree</string>
+    <string name="mode2">Radian</string>
 </resources>
