@@ -347,7 +347,8 @@
         android:id="@+id/openBracket"
         android:layout_alignTop="@+id/equal"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="onClick"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -356,7 +357,8 @@
         android:id="@+id/closeBracket"
         android:layout_alignBottom="@+id/equal"
         android:layout_toRightOf="@+id/openBracket"
-        android:layout_toEndOf="@+id/openBracket" />
+        android:layout_toEndOf="@+id/openBracket"
+        android:onClick="onClick"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -365,7 +367,9 @@
         android:id="@+id/mode"
         android:layout_alignBottom="@+id/equal"
         android:layout_toRightOf="@+id/equal"
-        android:layout_toEndOf="@+id/equal" />
+        android:layout_toEndOf="@+id/equal"
+        android:onClick="onClick"
+        android:textAllCaps="false"/>
 
     <Button
         android:layout_width="match_parent"
@@ -374,6 +378,7 @@
         android:id="@+id/history"
         android:layout_below="@+id/openBracket"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="onClick"/>
 
 </RelativeLayout>
