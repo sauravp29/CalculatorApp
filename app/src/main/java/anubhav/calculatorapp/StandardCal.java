@@ -27,6 +27,8 @@ public class StandardCal extends AppCompatActivity {
         e1=(EditText)findViewById(R.id.editText1);
         e2=(EditText)findViewById(R.id.editText2);
         dbHelper=new DBHelper(this);
+
+        e2.setText("0");
     }
 
     public void onClick(View v)

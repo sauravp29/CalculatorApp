@@ -19,6 +19,8 @@ public class ScientificCal extends AppCompatActivity {
     private Double result=0.0;
     private DBHelper dbHelper;
     private Button mode,toggle,square,xpowy,log,sin,cos,tan,sqrt,fact;
+    private int toggleMode=1;
+    private int angleMode=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,8 @@ public class ScientificCal extends AppCompatActivity {
 
         dbHelper=new DBHelper(this);
 
+        e2.setText("0");
+
         //tags to change the mode from degree to radian and vice versa
         mode.setTag(1);
         //tags to change the names of the buttons performing different operations
@@ -53,7 +57,7 @@ public class ScientificCal extends AppCompatActivity {
         switch (v.getId()) {
 
             case R.id.toggle:
-                int toggleMode=((int)toggle.getTag());
+                toggleMode=((int)toggle.getTag());
                 //change the button text if switch button is clicked
                 if(toggleMode==1)
                 {
@@ -90,7 +94,7 @@ public class ScientificCal extends AppCompatActivity {
                 break;
 
             case R.id.mode:
-                int angleMode=((int)mode.getTag());
+                angleMode=((int)mode.getTag());
                 //change the angle property for trignometric operations if mode button is clicked
                 if(angleMode==1)
                 {
@@ -103,7 +107,7 @@ public class ScientificCal extends AppCompatActivity {
                     mode.setText(R.string.mode1);
                 }
                 break;
-            
+
             case R.id.num0:
                 e2.setText(e2.getText() + "0");
                 break;
@@ -143,6 +147,10 @@ public class ScientificCal extends AppCompatActivity {
 
             case R.id.num9:
                 e2.setText(e2.getText() + "9");
+                break;
+
+            case R.id.pi:
+                e2.setText(e2.getText() + "pi");
                 break;
 
             case R.id.dot:
@@ -231,14 +239,155 @@ public class ScientificCal extends AppCompatActivity {
             case R.id.sqrt:
                 if (e2.length() != 0) {
                     text = e2.getText().toString();
-                    e2.setText("sqrt(" + text + ")");
+                    if(toggleMode==1)
+                        e2.setText("sqrt(" + text + ")");
+                    else if(toggleMode==2)
+                        e2.setText("cbrt(" + text + ")");
+                    else
+                        e2.setText("1/(" + text + ")");
                 }
                 break;
 
             case R.id.square:
                 if (e2.length() != 0) {
                     text = e2.getText().toString();
-                    e2.setText("(" + text + ")^2");
+                    if(toggleMode==2)
+                        e2.setText("(" + text + ")^3");
+                    else
+                        e2.setText("(" + text + ")^2");
+                }
+                break;
+
+            case R.id.xpowy:
+                if (e2.length() != 0) {
+                    text = e2.getText().toString();
+                    if(toggleMode==2)
+                        e2.setText("10^(" + text + ")");
+                    else
+                        e2.setText("(" + text + ")^");
+                }
+                break;
+
+            case R.id.log:
+                if (e2.length() != 0) {
+                    text = e2.getText().toString();
+                    if(toggleMode==2)
+                        e2.setText("ln(" + text + ")");
+                    else
+                        e2.setText("log(" + text + ")");
+                }
+                break;
+
+            case R.id.factorial:
+                if (e2.length() != 0) {
+                    text = e2.getText().toString();
+                    if(toggleMode==2)
+                    {
+                        e1.setText("(" + text + ")%");
+                        e2.setText("");
+                    }
+                    else
+                    {
+                        String res="";
+                        try
+                        {
+                            int []arr=new CalculateFactorial().factorial(Integer.parseInt(String.valueOf(Integer.getInteger(new ExtendedDoubleEvaluator().evaluate(text)+"",0))));
+                            if(arr.length>20)
+                            {
+                                for(int i=0;i<10;i++)
+                                {
+                                    if(i==1)
+                                        res+=".";
+                                    res+=arr[i];
+                                }
+                                res+="+10^"+(arr.length-2);
+                            }
+                            else
+                            {
+                                for(int i=0;i<arr.length;i++)
+                                {
+                                    res+=arr[i];
+                                }
+                            }
+                            e2.setText(res);
+                        }
+                        catch (Exception e)
+                        {
+                            e2.setText("Invalid!!");
+                        }
+                    }
+                }
+                break;
+
+            case R.id.sin:
+                if (e2.length() != 0) {
+                    text = e2.getText().toString();
+                    if(angleMode==1)
+                    {
+                        if(toggleMode==1)
+                            e2.setText("sin(" + text + "*pi/180)");
+                        else if(toggleMode==2)
+                            e2.setText("asin(" + text + "*pi/180)");
+                        else
+                            e2.setText("sinh(" + text + ")");
+                    }
+                    else
+                    {
+                        if(toggleMode==1)
+                            e2.setText("sin(" + text + ")");
+                        else if(toggleMode==2)
+                            e2.setText("asin(" + text + ")");
+                        else
+                            e2.setText("sinh(" + text + ")");
+                    }
+                }
+                break;
+
+            case R.id.cos:
+                if (e2.length() != 0) {
+                    text = e2.getText().toString();
+                    if(angleMode==1)
+                    {
+                        if(toggleMode==1)
+                            e2.setText("cos(" + text + "*pi/180)");
+                        else if(toggleMode==2)
+                            e2.setText("acos(" + text + "*pi/180)");
+                        else
+                            e2.setText("cosh(" + text + ")");
+                    }
+                    else
+                    {
+                        if(toggleMode==1)
+                            e2.setText("cos(" + text + ")");
+                        else if(toggleMode==2)
+                            e2.setText("acos(" + text + ")");
+                        else
+                            e2.setText("cosh(" + text + ")");
+                    }
+                }
+                break;
+
+            case R.id.tan:
+                if (e2.length() != 0) {
+                    text = e2.getText().toString();
+                    if(angleMode==1)
+                    {
+                        if(toggleMode==1)
+                            e2.setText("tan(" + text + "*pi/180)");
+                        else if(toggleMode==2)
+                            e2.setText("atan(" + text + "*pi/180)");
+                        else
+                            e2.setText("tanh(" + text + ")");
+                    }
+                    else
+                    {
+                        if(toggleMode==1)
+                            e2.setText("tan(" + text + ")");
+                        else if(toggleMode==2)
+                            e2.setText("atan(" + text + ")");
+                        else
+                            e2.setText("tanh(" + text + ")");
+                    }
                 }
                 break;
 
@@ -263,7 +412,6 @@ public class ScientificCal extends AppCompatActivity {
                 e1.setText("");
                 if (expression.length() == 0)
                     expression = "0.0";
-                DoubleEvaluator evaluator = new DoubleEvaluator();
                 try {
                     //evaluate the expression
                     result = new ExtendedDoubleEvaluator().evaluate(expression);
