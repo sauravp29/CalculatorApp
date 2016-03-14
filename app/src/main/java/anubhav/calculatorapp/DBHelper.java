@@ -52,7 +52,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<String> list=new ArrayList<String>();
         String []selectionArgs={calcName};
         //cursor=db.query(table_Name,columns,column1+" LIKE ?",selectionArgs,null,null,null);
-        cursor=db.rawQuery("select * from history where "+column1+"= ?",selectionArgs);
+        cursor=db.rawQuery("select * from "+table_Name+" where "+column1+" = ?",selectionArgs);
         if(cursor.moveToFirst())
         {
             do

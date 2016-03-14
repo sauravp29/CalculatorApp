@@ -4,21 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.fathzer.soft.javaluator.DoubleEvaluator;
 
 public class StandardCal extends AppCompatActivity {
 
-    EditText e1,e2;
+    private EditText e1,e2;
     private int count=0;
     private String expression="";
     private String text="";
     private Double result=0.0;
-    DBHelper dbHelper;
+    private DBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

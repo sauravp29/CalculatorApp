@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/backspace"
-        android:id="@+id/backspace"
+        android:id="@+id/backSpace"
         android:layout_below="@+id/spinner2"
         android:layout_toRightOf="@+id/clear"
         android:layout_toEndOf="@+id/clear"
@@ -84,8 +84,8 @@
         android:text="8"
         android:id="@+id/num8"
         android:layout_alignBottom="@+id/num7"
-        android:layout_alignLeft="@+id/backspace"
-        android:layout_alignStart="@+id/backspace"
+        android:layout_alignLeft="@+id/backSpace"
+        android:layout_alignStart="@+id/backSpace"
         android:onClick="onClick"/>
 
     <Button
