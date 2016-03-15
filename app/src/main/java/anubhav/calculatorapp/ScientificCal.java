@@ -205,15 +205,21 @@ public class ScientificCal extends AppCompatActivity {
                         }
                         newText=text.substring(0,pos);
                     }
-                    //if e2 edit text contains only - sign or sqrt at last then clear the edit text e2
-                    if(newText.equals("-")||newText.endsWith("sqrt"))
+                    //if e2 edit text contains only - sign or sqrt or any other text functions
+                    // at last then clear the edit text e2
+                    if(newText.equals("-")||newText.endsWith("sqrt")||newText.endsWith("log")||newText.endsWith("ln")
+                            ||newText.endsWith("sin")||newText.endsWith("asin")||newText.endsWith("asind")||newText.endsWith("sinh")
+                            ||newText.endsWith("cos")||newText.endsWith("acos")||newText.endsWith("acosd")||newText.endsWith("cosh")
+                            ||newText.endsWith("tan")||newText.endsWith("atan")||newText.endsWith("atand")||newText.endsWith("tanh")
+                            ||newText.endsWith("cbrt"))
                     {
                         newText="";
                     }
-                    //if pow sign is left at the last
-                    else if(newText.endsWith("^"))
+                    //if pow sign is left at the last or divide sign
+                    else if(newText.endsWith("^")||newText.endsWith("/"))
                         newText=newText.substring(0,newText.length()-1);
-
+                    else if(newText.endsWith("pi"))
+                        newText=newText.substring(0,newText.length()-2);
                     e2.setText(newText);
                 }
                 break;
@@ -450,7 +456,10 @@ public class ScientificCal extends AppCompatActivity {
                 break;
 
             case R.id.closeBracket:
-                e1.setText(e1.getText() + ")");
+                if(e2.length()!=0)
+                    e1.setText(e1.getText() +e2.getText().toString()+ ")");
+                else
+                    e1.setText(e1.getText() + ")");
                 break;
 
             case R.id.history:
