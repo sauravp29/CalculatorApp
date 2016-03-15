@@ -5,20 +5,30 @@ package anubhav.calculatorapp;
  */
 public class CalculateFactorial
 {
-    public static final int MAX=500;
+    public static final int MAX=1000;
+
+    private int res_size;
+    private int res[]=new int[MAX];
+
+    CalculateFactorial()
+    {
+        res_size = 1;
+    }
+
+    public int getRes()
+    {
+        return res_size;
+    }
 
     // This function finds factorial of large numbers and prints them
     public int[] factorial(int n)
     {
-        int res[]=new int[MAX];
-
         // Initialize result
         res[0] = 1;
-        int res_size = 1;
 
         // Apply simple factorial formula n! = 1 * 2 * 3 * 4...*n
         for (int x=2; x<=n; x++)
-            res_size = multiply(x, res, res_size);
+            res_size = multiply(x, res_size);
 
         return res;
     }
@@ -27,12 +37,12 @@ public class CalculateFactorial
 // res_size is size of res[] or number of digits in the number represented
 // by res[]. This function uses simple school mathematics for multiplication.
 // This function may value of res_size and returns the new value of res_size
-    private int multiply(int x, int res[], int res_size)
+    private int multiply(int x, int r)
     {
         int carry = 0;  // Initialize carry
 
         // One by one multiply n with individual digits of res[]
-        for (int i=0; i<res_size; i++)
+        for (int i=0; i<r; i++)
         {
             int prod = res[i] * x + carry;
             res[i] = prod % 10;  // Store last digit of 'prod' in res[]
@@ -42,10 +52,10 @@ public class CalculateFactorial
         // Put carry in res and increase result size
         while (carry!=0)
         {
-            res[res_size] = carry%10;
+            res[r] = carry%10;
             carry = carry/10;
-            res_size++;
+            r++;
         }
-        return res_size;
+        return r;
     }
 }

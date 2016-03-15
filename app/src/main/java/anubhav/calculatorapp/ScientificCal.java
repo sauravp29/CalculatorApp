@@ -54,10 +54,11 @@ public class ScientificCal extends AppCompatActivity {
 
     public void onClick(View v)
     {
+        toggleMode=(int)toggle.getTag();
+        angleMode=((int)mode.getTag());
         switch (v.getId()) {
 
             case R.id.toggle:
-                toggleMode=((int)toggle.getTag());
                 //change the button text if switch button is clicked
                 if(toggleMode==1)
                 {
@@ -83,7 +84,7 @@ public class ScientificCal extends AppCompatActivity {
                     sqrt.setText(R.string.inverse);
                     fact.setText(R.string.factorial);
                 }
-                else
+                else if(toggleMode==3)
                 {
                     toggle.setTag(1);
                     sin.setText(R.string.sin);
@@ -94,7 +95,6 @@ public class ScientificCal extends AppCompatActivity {
                 break;
 
             case R.id.mode:
-                angleMode=((int)mode.getTag());
                 //change the angle property for trignometric operations if mode button is clicked
                 if(angleMode==1)
                 {
@@ -239,6 +239,7 @@ public class ScientificCal extends AppCompatActivity {
             case R.id.sqrt:
                 if (e2.length() != 0) {
                     text = e2.getText().toString();
+                    toggleMode=(int)toggle.getTag();
                     if(toggleMode==1)
                         e2.setText("sqrt(" + text + ")");
                     else if(toggleMode==2)
@@ -291,20 +292,22 @@ public class ScientificCal extends AppCompatActivity {
                         String res="";
                         try
                         {
-                            int []arr=new CalculateFactorial().factorial(Integer.parseInt(String.valueOf(Integer.getInteger(new ExtendedDoubleEvaluator().evaluate(text)+"",0))));
-                            if(arr.length>20)
+                            CalculateFactorial cf=new CalculateFactorial();
+                            int []arr=cf.factorial((int)Double.parseDouble(String.valueOf(new ExtendedDoubleEvaluator().evaluate(text))));
+                            int res_size=cf.getRes();
+                            if(res_size>20)
                             {
-                                for(int i=0;i<10;i++)
+                                for (int i=res_size-1; i>=res_size-20; i--)
                                 {
-                                    if(i==1)
+                                    if(i==res_size-2)
                                         res+=".";
                                     res+=arr[i];
                                 }
-                                res+="+10^"+(arr.length-2);
+                                res+="E"+(res_size-1);
                             }
                             else
                             {
-                                for(int i=0;i<arr.length;i++)
+                                for (int i=res_size-1; i>=0; i--)
                                 {
                                     res+=arr[i];
                                 }
@@ -313,7 +316,13 @@ public class ScientificCal extends AppCompatActivity {
                         }
                         catch (Exception e)
                         {
-                            e2.setText("Invalid!!");
+                            if(e.toString().contains("ArrayIndexOutOfBoundsException"))
+                            {
+                                e2.setText("Result too big!");
+                            }
+                            else
+                                e2.setText("Invalid!!");
+                            e.printStackTrace();
                         }
                     }
                 }
@@ -325,9 +334,9 @@ public class ScientificCal extends AppCompatActivity {
                     if(angleMode==1)
                     {
                         if(toggleMode==1)
-                            e2.setText("sin(" + text + "*pi/180)");
+                            e2.setText("sin(" + text + ")");
                         else if(toggleMode==2)
-                            e2.setText("asin(" + text + "*pi/180)");
+                            e2.setText("asin(" + text + ")");
                         else
                             e2.setText("sinh(" + text + ")");
                     }
