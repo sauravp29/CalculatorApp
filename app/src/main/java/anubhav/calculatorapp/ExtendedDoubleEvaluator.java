@@ -16,6 +16,9 @@ public class ExtendedDoubleEvaluator extends DoubleEvaluator {
     /** Defines the new function (square root).*/
     private static final Function SQRT = new Function("sqrt", 1);
     private static final Function CBRT = new Function("cbrt", 1);
+    private static final Function ASIND = new Function("asind", 1);
+    private static final Function ACOSD = new Function("acosd", 1);
+    private static final Function ATAND = new Function("atand", 1);
     private static final Parameters PARAMS;
 
     static {
@@ -24,6 +27,9 @@ public class ExtendedDoubleEvaluator extends DoubleEvaluator {
         // add the new sqrt function to these parameters
         PARAMS.add(SQRT);
         PARAMS.add(CBRT);
+        PARAMS.add(ASIND);
+        PARAMS.add(ACOSD);
+        PARAMS.add(ATAND);
     }
 
     public ExtendedDoubleEvaluator() {
@@ -39,6 +45,18 @@ public class ExtendedDoubleEvaluator extends DoubleEvaluator {
         else if(function == CBRT)
         {
             return Math.cbrt(arguments.next());
+        }
+        else if(function == ASIND)
+        {
+            return Math.toDegrees(Math.asin(arguments.next()));
+        }
+        else if(function == ACOSD)
+        {
+            return Math.toDegrees(Math.acos(arguments.next()));
+        }
+        else if(function == ATAND)
+        {
+            return Math.toDegrees(Math.atan(arguments.next()));
         }
         else {
             // If it's another function, pass it to DoubleEvaluator

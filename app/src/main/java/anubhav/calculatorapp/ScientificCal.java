@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.fathzer.soft.javaluator.DoubleEvaluator;
-
 public class ScientificCal extends AppCompatActivity {
 
     private EditText e1,e2;
@@ -333,10 +331,11 @@ public class ScientificCal extends AppCompatActivity {
                     text = e2.getText().toString();
                     if(angleMode==1)
                     {
+                        double angle=Math.toRadians(new ExtendedDoubleEvaluator().evaluate(text));
                         if(toggleMode==1)
-                            e2.setText("sin(" + text + ")");
+                            e2.setText("sin(" + angle + ")");
                         else if(toggleMode==2)
-                            e2.setText("asin(" + text + ")");
+                            e2.setText("asind(" + text + ")");
                         else
                             e2.setText("sinh(" + text + ")");
                     }
@@ -357,10 +356,11 @@ public class ScientificCal extends AppCompatActivity {
                     text = e2.getText().toString();
                     if(angleMode==1)
                     {
+                        double angle=Math.toRadians(new ExtendedDoubleEvaluator().evaluate(text));
                         if(toggleMode==1)
-                            e2.setText("cos(" + text + "*pi/180)");
+                            e2.setText("cos(" + angle + ")");
                         else if(toggleMode==2)
-                            e2.setText("acos(" + text + "*pi/180)");
+                            e2.setText("acosd(" + text + ")");
                         else
                             e2.setText("cosh(" + text + ")");
                     }
@@ -381,10 +381,11 @@ public class ScientificCal extends AppCompatActivity {
                     text = e2.getText().toString();
                     if(angleMode==1)
                     {
+                        double angle=Math.toRadians(new ExtendedDoubleEvaluator().evaluate(text));
                         if(toggleMode==1)
-                            e2.setText("tan(" + text + "*pi/180)");
+                            e2.setText("tan(" + angle + ")");
                         else if(toggleMode==2)
-                            e2.setText("atan(" + text + "*pi/180)");
+                            e2.setText("atand(" + text + ")");
                         else
                             e2.setText("tanh(" + text + ")");
                     }
@@ -425,9 +426,17 @@ public class ScientificCal extends AppCompatActivity {
                     //evaluate the expression
                     result = new ExtendedDoubleEvaluator().evaluate(expression);
                     //insert expression and result in sqlite database if expression is valid and not 0.0
+                    if (String.valueOf(result).equals("6.123233995736766E-17"))
+                    {
+                        result=0.0;
+                        e2.setText(result + "");
+                    }
+                    else if(String.valueOf(result).equals("1.633123935319537E16"))
+                        e2.setText("infinity");
+                    else
+                        e2.setText(result + "");
                     if (!expression.equals("0.0"))
                         dbHelper.insert("SCIENTIFIC", expression + " = " + result);
-                    e2.setText(result + "");
                 } catch (Exception e) {
                     e2.setText("Invalid Expression");
                     e1.setText("");
