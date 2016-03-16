@@ -131,6 +131,17 @@ public class ConvertingUnits
         {
             return (meter*0.000621371);
         }
+
+        public double NanoToMeter(double milli)
+        {
+            return (milli/1000);
+        }
+
+        public double MeterToNano(double meter)
+        {
+            return (meter*1000);
+        }
+
     }
 
     //class to convert units of temperature
