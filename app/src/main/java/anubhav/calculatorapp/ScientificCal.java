@@ -74,7 +74,7 @@ public class ScientificCal extends AppCompatActivity {
                 {
                     toggle.setTag(3);
                     square.setText(R.string.square);
-                    xpowy.setText(R.string.xpown);
+                    xpowy.setText(R.string.epown);
                     log.setText(R.string.log);
                     sin.setText(R.string.hyperbolicSine);
                     cos.setText(R.string.hyperbolicCosine);
@@ -89,6 +89,7 @@ public class ScientificCal extends AppCompatActivity {
                     cos.setText(R.string.cos);
                     tan.setText(R.string.tan);
                     sqrt.setText(R.string.sqrt);
+                    xpowy.setText(R.string.xpown);
                 }
                 break;
 
@@ -218,7 +219,7 @@ public class ScientificCal extends AppCompatActivity {
                     //if pow sign is left at the last or divide sign
                     else if(newText.endsWith("^")||newText.endsWith("/"))
                         newText=newText.substring(0,newText.length()-1);
-                    else if(newText.endsWith("pi"))
+                    else if(newText.endsWith("pi")||newText.endsWith("e^"))
                         newText=newText.substring(0,newText.length()-2);
                     e2.setText(newText);
                 }
@@ -266,10 +267,12 @@ public class ScientificCal extends AppCompatActivity {
             case R.id.xpowy:
                 if (e2.length() != 0) {
                     text = e2.getText().toString();
-                    if(toggleMode==2)
+                    if(toggleMode==1)
+                        e2.setText("(" + text + ")^");
+                    else if(toggleMode==2)
                         e2.setText("10^(" + text + ")");
                     else
-                        e2.setText("(" + text + ")^");
+                        e2.setText("e^(" + text + ")");
                 }
                 break;
 

@@ -22,6 +22,7 @@
     <string name="posneg">±</string>
     <string name="arrow">↑</string>
     <string name="xpown">xⁿ</string>
+    <string name="epown">eⁿ</string>
     <string name="pi">π</string>
     <string name="title_activity_unit_area">UnitArea</string>
     <string name="title_activity_unit_length">UnitLength</string>
