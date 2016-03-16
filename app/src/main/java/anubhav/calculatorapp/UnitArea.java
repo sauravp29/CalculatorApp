@@ -7,11 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class UnitArea extends AppCompatActivity {
 
-    EditText e1,e2;
-    int count1=0,count2=0;
+    private EditText e1,e2;
+    private Spinner s1,s2;
+    private int count1=0,count2=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,8 +148,6 @@ public class UnitArea extends AppCompatActivity {
                     }
                 }
                 break;
-
         }
     }
-
 }

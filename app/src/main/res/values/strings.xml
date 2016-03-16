@@ -33,23 +33,24 @@
     <string name="history">History</string>
 
     <string-array name="area">
-        <item>sq. mile</item>
-        <item>sq. kilometer</item>
-        <item>sq meter</item>
-        <item>sq. centimeter</item>
-        <item>acre</item>
-        <item>hectare</item>
+        <item>Sq. Millimeter</item>
+        <item>Sq. Centimeter</item>
+        <item>Sq Meter</item>
+        <item>Sq. Kilometer</item>
+        <item>Acre</item>
+        <item>Hectare</item>
     </string-array>
 
     <string-array name="length">
-        <item>mile</item>
-        <item>kilometer</item>
-        <item>meter</item>
-        <item>centimeter</item>
-        <item>millimeter</item>
-        <item>inches</item>
-        <item>feet</item>
-        <item>yards</item>
+        <item>Nanometer</item>
+        <item>Millimeter</item>
+        <item>Centimeter</item>
+        <item>Meter</item>
+        <item>Kilometer</item>
+        <item>Inches</item>
+        <item>Foot</item>
+        <item>Yards</item>
+        <item>Mile</item>
     </string-array>
 
     <string-array name="temperature">
@@ -59,13 +60,16 @@
     </string-array>
 
     <string-array name="weight">
+        <item>Milligrams</item>
+        <item>Centigrams</item>
+        <item>Decigrams</item>
+        <item>Grams</item>
         <item>Kilograms</item>
         <item>Metric tonnes</item>
         <item>Pounds</item>
         <item>Ounces</item>
-        <item>Grams</item>
-        <item>Milligrams</item>
     </string-array>
+
     <string name="title_activity_history">History</string>
     <string name="deleteHistory">Delete History</string>
     <string name="mode1">Degree</string>
