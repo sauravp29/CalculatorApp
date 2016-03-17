@@ -134,12 +134,12 @@ public class ConvertingUnits
 
         public double NanoToMeter(double milli)
         {
-            return (milli/1000);
+            return (milli/1000000000);
         }
 
         public double MeterToNano(double meter)
         {
-            return (meter*1000);
+            return (meter*1000000000);
         }
 
     }
