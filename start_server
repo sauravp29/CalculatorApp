@@ -1,0 +1,11 @@
+#!/bin/bash
+
+sudo chown -R $USER /home/ubuntu/backend_server
+cd ~
+curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
+sudo bash /tmp/nodesource_setup.sh
+sudo apt install nodejs
+cd /home/ubuntu/backend_server
+npm install
+sudo npm install pm2 -g
+PORT=4000 pm2 start npm --name "app name" -- start
